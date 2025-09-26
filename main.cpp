@@ -56,21 +56,37 @@ void doTest1(){
     // SortByName을 이용해 알파벳 순으로 이름 정렬 
     cout << "Sort by Name" << endl;
     /* TODO */
+    for(int i = 0; i < numOfStudent - 1; i++){
+        for(int j = 0; j < numOfStudent - i - 1; j++){
+            if(students[j].name > students[j+1].name){
+                std::swap(students[j], students[j+1]);
+            }
+        }
+    }
     printStudentList();
 
     // SortByMidterm을 이용해 중간고사 성적 높은 순으로 정렬
     cout << "Sort by Midterm" << endl;
     /* TODO */
+    std::sort(students, students + numOfStudent, [] (const StudentStruct& x, const StudentStruct& y) {
+        return x.record.midterm > y.record.midterm;
+    });
     printStudentList();
 
     // SortByFinal을 이용해 기말고사 성적 높은 순으로 정렬
     cout << "Sort by Final" << endl;
     /* TODO */
+    std::sort(students, students + numOfStudent, [] (const StudentStruct& x, const StudentStruct& y) {
+        return x.record.final > y.record.final;
+    });
     printStudentList();
 
     // SortByTotal을 이용해 중간 + 기말 고사 높은 순으로 정렬
     cout << " Sort by Total" << endl;
     /* TODO */
+    std::sort(students, students + numOfStudent, [] (const StudentStruct& x, const StudentStruct& y) {
+        return (x.record.midterm + x.record.final) > (y.record.midterm + y.record.final);
+    });
     printStudentList();
 }
 
@@ -81,30 +97,46 @@ void doTest2(){
 
     // StudentStruct의 ID 필드를 기준으로 알파벳 순으로 정렬하는 lambda 함수 정의 및 std::sort를 이용해 정렬하기
     cout << "Sort by ID" << endl;
-    auto sortByID = [](StudentStruct &a, StudentStruct &b) -> int {
-        return a.id < b.id;
+    auto sortid = [](StudentStruct &x, StudentStruct &y) -> int {
+        return x.id < y.id;
     };
-    std::sort(students, students + numOfStudent, sortByID);
+    std::sort(students, students + numOfStudent, sortid);
     printStudentList();
 
     // StudentStruct의 name 필드를 기준으로 알파벳 순으로 정렬하는 lambda 함수 정의 및 std::sort를 이용해 정렬하기
     cout << "Sort by Name" << endl;
     /* TODO */
+    auto sortname = [](StudentStruct &x, StudentStruct &y) -> int {
+        return x.name < y.name;
+    };
+    std::sort(students, students + numOfStudent, sortname);
     printStudentList();
 
     // StudentStruct의 midterm 점수를 기준으로 높은순으로 정렬하는 lambda 함수 정의 및 std::sort를 이용해 정렬하기
     cout << "Sort by Midterm" << endl;
+    auto sortmid = [](StudentStruct &x, StudentStruct &y) -> int {
+        return x.record.midterm > y.record.midterm;
+    };
+    std::sort(students, students + numOfStudent, sortmid);
     /* TODO */
     printStudentList();
 
 
     // StudentStruct의 final 점수를 기준으로 높은순으로 정렬하는 lambda 함수 정의 및 std::sort를 이용해 정렬하기
     cout << "Sort by Final" << endl;
+    auto sortfinal = [](StudentStruct &x, StudentStruct &y) -> int {
+        return x.record.final > y.record.final;
+    };
+    std::sort(students, students + numOfStudent, sortfinal);
     /* TODO */
     printStudentList();
 
     // StudentStruct의 midterm+final 점수를 기준으로 알파벳 순으로 정렬하는 lambda 함수 정의 및 std::sort를 이용해 정렬하기
     cout << " Sort by Total" << endl;
+    auto sorttotal = [](StudentStruct &x, StudentStruct &y) -> int {
+        return (x.record.midterm + x.record.final) > (y.record.midterm + y.record.final);
+    };
+    std::sort(students, students + numOfStudent, sorttotal);
     /* TODO */
     printStudentList();
 
